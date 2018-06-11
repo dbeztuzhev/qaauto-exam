@@ -5,9 +5,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Base Page Object class
+ */
 public abstract class GoogleBasePage {
     protected WebDriver webDriver;
 
+    /**
+     * Constructor of BasePage
+     * @param webDriver - current browser instance
+     */
     public GoogleBasePage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }

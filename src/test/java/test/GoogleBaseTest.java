@@ -10,27 +10,29 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import page.GoogleLandingPage;
 
+/**
+ * Base Test Object class
+ */
 public class GoogleBaseTest {
     WebDriver webDriver;
     GoogleLandingPage googleLandingPage;
 
     /**
-     * Method to be executed before each test - opens browser and landing url
+     * Method to be executed before each test - opens browser and landing url, creates new object of Landing page class
      * @param browserType - browser test to be executed in, open Test suits *xml documents to parametrize a value. Default value is placed in Optional annotation
      */
     @Parameters({"browserType"})
     @BeforeMethod
     public void beforeTest(@Optional("chrome") String browserType) {
 
-        if ("firefox".equals(browserType.toLowerCase())) {
-            WebDriverManager.firefoxdriver().setup();
-            webDriver = new FirefoxDriver();
-
-        } else {
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
+        switch (browserType.toLowerCase()) {
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+            default:
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver();
         }
-
         webDriver.navigate().to("https://www.google.com/");
         googleLandingPage = new GoogleLandingPage(webDriver);
     }
